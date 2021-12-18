@@ -89,10 +89,12 @@ import TabPanel from 'primevue/tabpanel';
 import Tooltip from 'primevue/tooltip';
 import ToggleButton from 'primevue/togglebutton';
 import Tree from 'primevue/tree';
+import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 
 import CodeHighlight from './AppCodeHighlight';
+import BlockViewer from './BlockViewer';
 
 router.beforeEach(function(to, from, next) {
     window.scrollTo(0, 0);
@@ -101,7 +103,7 @@ router.beforeEach(function(to, from, next) {
 
 const app = createApp(App);
 
-app.config.globalProperties.$appState = reactive({ theme: 'saga-blue', darkTheme: false });
+app.config.globalProperties.$appState = reactive({ theme: 'lara-light-indigo', darkTheme: false });
 
 app.use(PrimeVue, { ripple: true, inputStyle: 'outlined' });
 app.use(ConfirmationService);
@@ -188,7 +190,10 @@ app.component('Toast', Toast);
 app.component('Toolbar', Toolbar);
 app.component('ToggleButton', ToggleButton);
 app.component('Tree', Tree);
+app.component('TreeSelect', TreeSelect);
 app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
+
+app.component('BlockViewer', BlockViewer);
 
 app.mount('#app');

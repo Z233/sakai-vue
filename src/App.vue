@@ -12,7 +12,7 @@
             <AppFooter />
         </div>
 
-		<AppConfig :layoutMode="layoutMode" :layoutColorMode="layoutColorMode" @layout-change="onLayoutChange" @layout-color-change="onLayoutColorChange" />
+		<AppConfig :layoutMode="layoutMode" @layout-change="onLayoutChange" />
         <transition name="layout-mask">
             <div class="layout-mask p-component-overlay" v-if="mobileMenuActive"></div>
         </transition>
@@ -29,7 +29,6 @@ export default {
     data() {
         return {
             layoutMode: 'static',
-            layoutColorMode: 'light',
             staticMenuInactive: false,
             overlayMenuActive: false,
             mobileMenuActive: false,
@@ -41,7 +40,7 @@ export default {
                     }]
                 },
 				{
-					label: 'UI Kit', icon: 'pi pi-fw pi-sitemap',
+					label: 'UI Components', icon: 'pi pi-fw pi-sitemap',
 					items: [
 						{label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/formlayout'},
 						{label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/input'},
@@ -60,12 +59,25 @@ export default {
 						{label: 'Misc', icon: 'pi pi-fw pi-circle-off', to: '/misc'},
 					]
 				},
+                {
+                    label: 'UI Blocks',
+                    items: [
+                        {label: 'Free Blocks', icon: 'pi pi-fw pi-eye', to: '/blocks', badge: "NEW"},
+                        {label: 'All Blocks', icon: 'pi pi-fw pi-globe', url: 'https://www.primefaces.org/primeblocks-vue'}
+                    ]
+                },
+                {
+                    label: 'Icons',
+                    items: [
+                        {label: 'PrimeIcons', icon: 'pi pi-fw pi-prime', to: '/icons'}
+                    ]
+                },
 				{
 					label: 'Pages', icon: 'pi pi-fw pi-clone',
 					items: [
 						{label: 'Crud', icon: 'pi pi-fw pi-user-edit', to: '/crud'},
 						{label: 'Timeline', icon: 'pi pi-fw pi-calendar', to: '/timeline'},
-						{label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: '/empty'}
+						{label: 'Empty', icon: 'pi pi-fw pi-circle-off', to: '/empty'},
 					]
 				},
                 {
@@ -172,9 +184,6 @@ export default {
 		onLayoutChange(layoutMode) {
 			this.layoutMode = layoutMode;
 		},
-		onLayoutColorChange(layoutColorMode) {
-			this.layoutColorMode = layoutColorMode;
-		},
         addClass(element, className) {
             if (element.classList)
                 element.classList.add(className);
@@ -215,7 +224,7 @@ export default {
             }];
         },
         logo() {
-            return (this.layoutColorMode === 'dark') ? "images/logo-white.svg" : "images/logo.svg";
+            return (this.$appState.darkTheme) ? "images/logo-white.svg" : "images/logo.svg";
         }
     },
     beforeUpdate() {
